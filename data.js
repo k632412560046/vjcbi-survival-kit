@@ -11,7 +11,7 @@ window.SURVIVAL_DATA = {
     shortName: "Survival Kit",
     tagline: "Không biết tìm ở đâu? Bắt đầu từ đây.",
     description: "Cổng tra cứu nhanh dành cho sinh viên Trường Kinh doanh và Sáng tạo Việt - Nhật.",
-    aiAssistantUrl: "", // Dán link AI Assistant tại đây, ví dụ: https://chatgpt.com/g/...
+    aiApiUrl: "/api/chat", // Nếu frontend vẫn ở GitHub Pages, đổi thành URL Vercel đầy đủ: https://...vercel.app/api/chat
     contactEmail: "dtcq@VJCC.org.vn",
     lastUpdated: "16/08/2026"
   },

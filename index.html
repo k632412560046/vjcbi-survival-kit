@@ -23,7 +23,7 @@
       </nav>
       <div class="nav-actions">
         <button class="lang">VI <span>/</span> EN</button>
-        <a class="ai-btn" id="aiTop" data-ai-link href="#" target="_blank" rel="noopener">Hỏi Survival AI <span>↗</span></a>
+        <a class="ai-btn" id="aiTop" data-ai-link href="#ai-assistant">Hỏi Survival AI <span>↗</span></a>
       </div>
     </div>
   </header>
@@ -39,7 +39,7 @@
           <p>Thông tin thiết yếu, thủ tục, hoạt động, đầu mối liên hệ và câu trả lời nhanh dành cho sinh viên Trường Kinh doanh và Sáng tạo Việt - Nhật.</p>
           <div class="hero-actions">
             <a class="primary-btn" href="#quick-access">Tra cứu ngay <span>↓</span></a>
-            <a class="secondary-btn" data-ai-link href="#" target="_blank" rel="noopener">Hỏi Survival AI <span>✦</span></a>
+            <a class="secondary-btn" data-ai-link href="#ai-assistant">Hỏi Survival AI <span>✦</span></a>
           </div>
           <div class="search-wrap">
             <div class="search-shell" role="search">
@@ -145,10 +145,43 @@
     <section class="cta-section">
       <div class="section-wrap cta-card">
         <div><span class="section-kicker light">ASK WHEN YOU NEED</span><h2>Không thấy câu trả lời?<br>Hỏi Survival AI.</h2><p>AI là lớp hỗ trợ thứ hai. Website vẫn là nguồn thông tin chính thức để sinh viên browse và kiểm tra nguồn.</p></div>
-        <a href="https://chatgpt.com/" target="_blank" rel="noopener">Mở AI Assistant <span>↗</span></a>
+        <a data-ai-link href="#ai-assistant">Hỏi ngay trên website <span>✦</span></a>
       </div>
     </section>
   </main>
+
+
+  <!-- Embedded Survival AI -->
+  <button class="ai-fab" id="aiFab" type="button" aria-label="Mở Survival AI">
+    <span class="ai-fab-mark">✦</span><span>Hỏi AI</span>
+  </button>
+  <div class="ai-backdrop" id="aiBackdrop" hidden></div>
+  <aside class="ai-panel" id="aiPanel" aria-hidden="true" aria-label="VJCBI Survival Assistant">
+    <div class="ai-panel-head">
+      <div class="ai-identity">
+        <div class="ai-orb">✦</div>
+        <div><strong>VJCBI Survival AI</strong><span>Tra cứu từ dữ liệu Survival Kit</span></div>
+      </div>
+      <button class="ai-close" id="aiClose" type="button" aria-label="Đóng">×</button>
+    </div>
+    <div class="ai-trust-note">AI chỉ được hướng dẫn trả lời từ dữ liệu VJCBI đã cung cấp. Nếu chưa có thông tin, AI sẽ nói rõ thay vì tự đoán.</div>
+    <div class="ai-messages" id="aiMessages" aria-live="polite">
+      <div class="ai-message assistant">
+        <div class="ai-bubble">Chào bạn. Bạn có thể hỏi mình về học phí, nghỉ học, thi cử, học bổng, hoạt động ngoại khóa, giấy xác nhận và các thông tin khác trong Survival Kit.</div>
+      </div>
+      <div class="ai-suggestions" id="aiSuggestions">
+        <button type="button">Quên thẻ sinh viên khi thi thì làm gì?</button>
+        <button type="button">Cách xin nghỉ học như thế nào?</button>
+        <button type="button">Học phí được tính ra sao?</button>
+        <button type="button">Giờ tiếp sinh viên của Ban ĐTCQ?</button>
+      </div>
+    </div>
+    <form class="ai-composer" id="aiForm">
+      <textarea id="aiInput" rows="1" maxlength="1200" placeholder="Hỏi bất cứ điều gì về VJCBI..." aria-label="Câu hỏi cho Survival AI"></textarea>
+      <button id="aiSend" type="submit" aria-label="Gửi câu hỏi"><span>↑</span></button>
+      <small>Enter để gửi · Shift + Enter xuống dòng</small>
+    </form>
+  </aside>
 
   <footer>
     <div class="footer-inner">

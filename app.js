@@ -199,13 +199,103 @@
   window.addEventListener('hashchange', openHashTarget);
   openHashTarget();
 
-  // AI links
-  const aiUrl = data.settings.aiAssistantUrl?.trim();
-  $$('[data-ai-link]').forEach(link => {
-    if (aiUrl) link.href = aiUrl;
-    else link.addEventListener('click', e => {
-      e.preventDefault();
-      alert('AI Assistant chưa được cấu hình. Admin dán link vào data.js → settings → aiAssistantUrl.');
-    });
+  // Embedded Survival AI
+  const aiPanel = $('#aiPanel');
+  const aiBackdrop = $('#aiBackdrop');
+  const aiClose = $('#aiClose');
+  const aiFab = $('#aiFab');
+  const aiMessages = $('#aiMessages');
+  const aiForm = $('#aiForm');
+  const aiInput = $('#aiInput');
+  const aiSend = $('#aiSend');
+  const aiSuggestions = $('#aiSuggestions');
+  const aiApiUrl = data.settings.aiApiUrl || '/api/chat';
+  const aiHistory = [];
+  let aiBusy = false;
+
+  function openAI(prefill='') {
+    aiPanel?.classList.add('open');
+    aiPanel?.setAttribute('aria-hidden','false');
+    if (aiBackdrop) aiBackdrop.hidden = false;
+    document.body.classList.add('ai-open');
+    if (prefill && aiInput) aiInput.value = prefill;
+    setTimeout(() => aiInput?.focus(), 150);
+  }
+  function closeAI() {
+    aiPanel?.classList.remove('open');
+    aiPanel?.setAttribute('aria-hidden','true');
+    if (aiBackdrop) aiBackdrop.hidden = true;
+    document.body.classList.remove('ai-open');
+  }
+  $$('[data-ai-link]').forEach(link => link.addEventListener('click', e => { e.preventDefault(); openAI(); }));
+  aiFab?.addEventListener('click', () => openAI());
+  aiClose?.addEventListener('click', closeAI);
+  aiBackdrop?.addEventListener('click', closeAI);
+  window.addEventListener('keydown', e => { if (e.key === 'Escape' && aiPanel?.classList.contains('open')) closeAI(); });
+
+  function addAIMessage(role, text, sources=[]) {
+    if (!aiMessages) return;
+    const wrap=document.createElement('div');
+    wrap.className=`ai-message ${role}`;
+    const bubble=document.createElement('div');
+    bubble.className='ai-bubble';
+    bubble.textContent=text;
+    wrap.appendChild(bubble);
+    if (role === 'assistant' && sources?.length) {
+      const src=document.createElement('div'); src.className='ai-sources';
+      const label=document.createElement('span'); label.textContent='Nguồn liên quan'; src.appendChild(label);
+      sources.forEach(s=>{
+        const el=s.url ? document.createElement('a') : document.createElement('button');
+        if (s.url) { el.href=s.url; el.target='_blank'; el.rel='noopener noreferrer'; }
+        else el.type='button';
+        el.textContent=`${s.id || 'Nguồn'} · ${s.title || s.category || 'Survival Kit'}`;
+        src.appendChild(el);
+      });
+      wrap.appendChild(src);
+    }
+    aiMessages.appendChild(wrap);
+    aiMessages.scrollTop=aiMessages.scrollHeight;
+    return wrap;
+  }
+  function addTyping() {
+    const wrap=document.createElement('div'); wrap.className='ai-message assistant ai-typing-wrap';
+    wrap.innerHTML='<div class="ai-bubble ai-typing"><i></i><i></i><i></i></div>';
+    aiMessages?.appendChild(wrap); aiMessages.scrollTop=aiMessages.scrollHeight; return wrap;
+  }
+  async function askAI(question) {
+    const q=String(question||'').trim();
+    if (!q || aiBusy) return;
+    aiBusy=true; aiSend?.setAttribute('disabled',''); aiInput?.setAttribute('disabled','');
+    aiSuggestions?.classList.add('used');
+    addAIMessage('user',q);
+    if (aiInput) { aiInput.value=''; aiInput.style.height='auto'; }
+    const typing=addTyping();
+    try {
+      const response=await fetch(aiApiUrl, {
+        method:'POST',
+        headers:{'Content-Type':'application/json'},
+        body:JSON.stringify({message:q,history:aiHistory.slice(-6)})
+      });
+      const payload=await response.json().catch(()=>({}));
+      typing?.remove();
+      if (!response.ok) throw new Error(payload.error || 'AI chưa phản hồi được.');
+      addAIMessage('assistant', payload.answer || 'Mình chưa có câu trả lời.', payload.sources || []);
+      aiHistory.push({role:'user',content:q},{role:'assistant',content:payload.answer || ''});
+      if (aiHistory.length>10) aiHistory.splice(0,aiHistory.length-10);
+    } catch (err) {
+      typing?.remove();
+      addAIMessage('assistant', `${err.message || 'Có lỗi khi kết nối AI.'} Vui lòng thử lại sau.`);
+    } finally {
+      aiBusy=false; aiSend?.removeAttribute('disabled'); aiInput?.removeAttribute('disabled'); aiInput?.focus();
+    }
+  }
+  aiForm?.addEventListener('submit', e=>{e.preventDefault(); askAI(aiInput?.value);});
+  aiInput?.addEventListener('keydown', e=>{
+    if (e.key==='Enter' && !e.shiftKey) { e.preventDefault(); askAI(aiInput.value); }
   });
+  aiInput?.addEventListener('input', ()=>{
+    aiInput.style.height='auto'; aiInput.style.height=Math.min(aiInput.scrollHeight,120)+'px';
+  });
+  aiSuggestions?.querySelectorAll('button').forEach(btn=>btn.addEventListener('click',()=>askAI(btn.textContent)));
+
 })();
