@@ -1,0 +1,114 @@
+<!doctype html>
+<html lang="vi">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta name="theme-color" content="#063a78" />
+  <title>VJCBI Survival Kit</title>
+  <link rel="stylesheet" href="styles.css" />
+</head>
+<body>
+  <header class="site-header" id="top">
+    <div class="nav-shell">
+      <a class="logo" href="#top" aria-label="VJCBI Survival Kit">
+        <img src="assets/vjcbi-logo-header.png" alt="VJCBI" />
+      </a>
+      <button class="menu-btn" id="menuBtn" aria-label="Mở menu" aria-expanded="false"><span></span><span></span></button>
+      <nav class="main-nav" id="mainNav">
+        <a href="#gioi-thieu">Giới thiệu</a>
+        <a href="#quyen-nghia-vu">Quyền & nghĩa vụ</a>
+        <a href="#ngoai-khoa">Ngoại khóa</a>
+        <a href="#thay-co">Thầy cô</a>
+        <a href="#hoi-dap">Hỏi & đáp</a>
+      </nav>
+      <div class="nav-actions">
+        <button class="lang">VI <span>/</span> EN</button>
+        <a class="ai-btn" id="aiTop" href="https://chatgpt.com/" target="_blank" rel="noopener">Hỏi Survival AI <span>↗</span></a>
+      </div>
+    </div>
+  </header>
+
+  <main>
+    <section class="hero">
+      <div class="hero-bg" aria-hidden="true"></div>
+      <div class="hero-overlay" aria-hidden="true"></div>
+      <div class="hero-inner">
+        <div class="hero-copy">
+          <div class="eyebrow"><span class="eyebrow-dot"></span> VJCBI STUDENT SURVIVAL KIT · 2026</div>
+          <h1>Một nơi để bắt đầu<br><span>mọi câu hỏi ở VJCBI.</span></h1>
+          <p>Thông tin thiết yếu, thủ tục, hoạt động, đầu mối liên hệ và câu trả lời nhanh dành cho sinh viên Trường Kinh doanh và Sáng tạo Việt - Nhật.</p>
+          <div class="hero-actions">
+            <a class="primary-btn" href="#quick-access">Tra cứu ngay <span>↓</span></a>
+            <a class="secondary-btn" href="https://chatgpt.com/" target="_blank" rel="noopener">Hỏi Survival AI <span>✦</span></a>
+          </div>
+          <div class="search-shell" role="search">
+            <svg viewBox="0 0 24 24" aria-hidden="true"><path d="m21 21-4.35-4.35m2.35-5.65a8 8 0 1 1-16 0 8 8 0 0 1 16 0Z"/></svg>
+            <input id="searchInput" placeholder="Tìm học phí, nghỉ học, học bổng, giấy xác nhận..." />
+            <kbd>Ctrl K</kbd>
+          </div>
+        </div>
+
+        <div class="hero-note">
+          <div class="note-line"><span>01</span><p>Thông tin đã được hệ thống hóa để tra cứu nhanh.</p></div>
+          <div class="note-line"><span>02</span><p>Không tìm thấy? Chuyển thẳng sang Survival AI.</p></div>
+          <div class="note-line"><span>03</span><p>Cập nhật theo từng năm học và đầu mối phụ trách.</p></div>
+        </div>
+      </div>
+
+      <div class="quick-strip" id="quick-access">
+        <a href="#gioi-thieu"><span class="num">01</span><span><b>Giới thiệu</b><small>VJCBI & chương trình</small></span><i>↗</i></a>
+        <a href="#quyen-nghia-vu"><span class="num">02</span><span><b>Quyền & nghĩa vụ</b><small>Quy định & thủ tục</small></span><i>↗</i></a>
+        <a href="#ngoai-khoa"><span class="num">03</span><span><b>Ngoại khóa</b><small>Hoạt động & VJSA</small></span><i>↗</i></a>
+        <a href="#thay-co"><span class="num">04</span><span><b>Thầy cô</b><small>Tìm đúng đầu mối</small></span><i>↗</i></a>
+        <a href="#hoi-dap"><span class="num">05</span><span><b>Hỏi & đáp</b><small>Câu hỏi thường gặp</small></span><i>↗</i></a>
+      </div>
+    </section>
+
+    <section class="intro-section" id="gioi-thieu">
+      <div class="section-wrap split-head">
+        <div>
+          <span class="section-kicker">START HERE</span>
+          <h2>Survival Kit không phải một cuốn handbook.</h2>
+        </div>
+        <p>Đây là điểm tra cứu đầu tiên khi sinh viên cần biết mình phải làm gì, tìm ai hoặc đọc nguồn nào. Nội dung bên dưới sẽ được kết nối với database để admin cập nhật mà không phải sửa giao diện.</p>
+      </div>
+
+      <div class="section-wrap card-grid">
+        <article class="feature-card dark-card" id="quyen-nghia-vu">
+          <div class="card-top"><span>01</span><i>↗</i></div>
+          <div><small>STUDENT ESSENTIALS</small><h3>Quyền & nghĩa vụ</h3><p>Học phí, học lại, hoãn thi, học bổng, trao đổi, giấy xác nhận và các quy định sinh viên.</p></div>
+        </article>
+        <article class="feature-card red-card" id="ngoai-khoa">
+          <div class="card-top"><span>02</span><i>↗</i></div>
+          <div><small>BEYOND CLASS</small><h3>Hoạt động ngoại khóa</h3><p>Chuyến đi doanh nghiệp, hoạt động thường niên, VJSA và các cơ hội kết nối.</p></div>
+        </article>
+        <article class="feature-card light-card" id="thay-co">
+          <div class="card-top"><span>03</span><i>↗</i></div>
+          <div><small>WHO TO CONTACT</small><h3>Chân dung thầy cô</h3><p>Biết đúng người phụ trách, cách liên hệ và thời gian tiếp sinh viên.</p></div>
+        </article>
+        <article class="feature-card blue-card" id="hoi-dap">
+          <div class="card-top"><span>04</span><i>↗</i></div>
+          <div><small>QUICK ANSWERS</small><h3>Hỏi & đáp</h3><p>Tìm câu trả lời ngắn gọn trước khi phải nhắn hỏi người khác.</p></div>
+        </article>
+      </div>
+    </section>
+
+    <section class="cta-section">
+      <div class="section-wrap cta-card">
+        <div><span class="section-kicker light">ASK WHEN YOU NEED</span><h2>Không thấy câu trả lời?<br>Hỏi Survival AI.</h2><p>AI là lớp hỗ trợ thứ hai. Website vẫn là nguồn thông tin chính thức để sinh viên browse và kiểm tra nguồn.</p></div>
+        <a href="https://chatgpt.com/" target="_blank" rel="noopener">Mở AI Assistant <span>↗</span></a>
+      </div>
+    </section>
+  </main>
+
+  <footer>
+    <div class="footer-inner">
+      <strong>VJCBI Survival Kit</strong>
+      <span>Student-first information hub · 2026</span>
+      <a href="#top">Lên đầu trang ↑</a>
+    </div>
+  </footer>
+
+<script src="app.js"></script>
+</body>
+</html>
